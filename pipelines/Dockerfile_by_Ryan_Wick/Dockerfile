@@ -23,5 +23,8 @@ RUN curl -L -o autocycler.tar.gz $(curl -s https://api.github.com/repos/rrwick/A
     mv autocycler *.sh *.py /opt/conda/envs/autocycler/bin/ && \
     rm environment.yml autocycler.tar.gz autocycler_scripts.tar.gz
 
+# Install GNU Parallel
+RUN apt-get update && apt-get install -y parallel
+
 # Set default command to Autocycler help and show missing/installed tools.
 CMD ["/bin/sh", "-c", "autocycler --help; echo \"\nInstalled tools:\"; cat /tmp/installed_tools.txt; echo \"\nMissing tools:\"; cat /tmp/missing_tools.txt; echo"]
